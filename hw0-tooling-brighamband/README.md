@@ -1,3 +1,8 @@
+# Help Video
+
+https://byu.zoom.us/rec/share/_XYvBtZ0QMsNhsY_mlAoPBjIrKBhqyytUntLEQV1aulQvHX6FKm-Fst_cJthHX_S.7e0O7ar-9A3R05zP (Links to an external site.)
+Passcode: N8#GAtx1
+
 # Intro
 
 The goal of this homework is to install the core tooling that is used throughout the semester and to learn its basic functionality: build (Maven), revision control (Git Feature Branch Workflow), code documentation (JavaDoc), lint-ing (CheckStyle), and logging (SLF4J). Many of the steps require research to complete and lack specificity. Use the TAs, Slack, and peers early rather than spend hours trying to figure something out. Tooling is a pain, but once it works, it is amazing.
