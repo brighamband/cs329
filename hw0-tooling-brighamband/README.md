@@ -1,6 +1,6 @@
 # Help Video
 
-https://byu.zoom.us/rec/share/_XYvBtZ0QMsNhsY_mlAoPBjIrKBhqyytUntLEQV1aulQvHX6FKm-Fst_cJthHX_S.7e0O7ar-9A3R05zP (Links to an external site.)
+https://byu.zoom.us/rec/share/_XYvBtZ0QMsNhsY_mlAoPBjIrKBhqyytUntLEQV1aulQvHX6FKm-Fst_cJthHX_S.7e0O7ar-9A3R05zP
 
 Passcode: N8#GAtx1
 
