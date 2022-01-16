@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +46,7 @@ public class SumVisitorTest {
 
   // Disabled test
   @Test
+  @Tag("development")
   // @Disabled
   @DisplayName("A disabled test")
   void testNotRun() {
@@ -52,12 +54,14 @@ public class SumVisitorTest {
   }
 
   @Test
+  @Tag("development")
   @DisplayName("Tests that sum visitor starts out at 0")
   public void testSumIsZeroIfStarting() {
     assertEquals(0, sumVisitor.getTotal());
   }
 
   @Test
+  @Tag("development")
   @DisplayName("Tests that visit returns true")
   public void testVisitReturnsTrue() {
     NumberNode n = new NumberNode(1);
@@ -65,6 +69,7 @@ public class SumVisitorTest {
   }
 
   @Test
+  @Tag("development")
   @DisplayName("Tests end visit runs fine")
   public void testEndVisitRunsFine() {
     NumberNode n = new NumberNode(1);
@@ -88,6 +93,7 @@ public class SumVisitorTest {
     }
 
     @Test
+    @Tag("development")
     @DisplayName("Tests that visit to positive number increases sum")
     public void testPositiveNumVisitIncreasesSum() {
       NumberNode posNumNode = new NumberNode(5);
@@ -96,6 +102,7 @@ public class SumVisitorTest {
     }
 
     @Test
+    @Tag("development")
     @DisplayName("Tests that visit to negative number decreases sum")
     public void testNegativeNumVisitDecreasesSum() {
       NumberNode negNumNode = new NumberNode(-5);
