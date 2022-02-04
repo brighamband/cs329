@@ -1,0 +1,40 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ main ]
+  pull_request: 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository and submodules
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+        token: ${{ secrets.ACCESS_TOKEN }}
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: mvn install project-utils
+      working-directory: ./project-utils
+      run: mvn -ntp install
+    - name: Maven build and test assignment
+      run: mvn -ntp verify 
+      continue-on-error: true
+    - name: Checkstyle
+      run: mvn -ntp test -Dcheckstyle.violationSeverity=warning
+      continue-on-error: true
+    - name: Maven exec:java
+      run: mvn -ntp exec:java 
+      continue-on-error: true
+    - name: Report decision coverage
+      run: |
+        mvn -ntp jacoco:report
+        echo "CODE COVERAGE SUMMARY"; awk -F, '{ instructions += $4; covered += $5 } { branches += $6; branches_covered += $7 } { lines += $8; lines_covered += $9 } { complexity += $10; complexity_covered += $11 } { methods += $12; methods_covered += $13 } END { print "Instructions missed: ", instructions, " covered:", covered; print "Branches missed:     ", branches, " covered:", branches_covered; print "lines missed:        ", lines, " covered:", lines_covered; print "complexity missed:   ", complexity, " covered:", complexity_covered; print "methods missed:      ", methods, " covered:", methods_covered; }' target/site/jacoco/jacoco.csv; echo "FULL SUMMARY: "; cat target/site/jacoco/jacoco.csv | column -t -s, 
