@@ -5,13 +5,17 @@ public class Misc {
   /**
    * Adds an element to an array if it is not already in the array.
    * 
-   * @requires exists i in arr (i = null)                   ---- array has a null element
+   * @requires x != null
+   * @requires arr != null
+   * @requires exists i in arr (i = null || i = x)
    * 
-   * @ensures exists i in arr (i = x)                       ---- array will have x
-   * @ensures exists x in old(arr) ==> arr == old(arr)      ---- element already in array
-   * @ensures size(old(arr)) == size(arr)                   ---- size will stay the same
+   * @ensures exists i in arr (i = x)
+   *      ---- array will have x
+   * @ensures exists x in old(arr) ==> arr == old(arr)
+   *      --- array will stay the exact same if element already exists
+   * @ensures size(old(arr)) == size(arr) ---- size will stay the same
    * 
-   * @param x element to add
+   * @param x   element to add
    * @param arr array to which x is added
    */
   public static void ff(Object x, Object[] arr) {
@@ -24,7 +28,7 @@ public class Misc {
         break;
       } // B2
     } // A2
-    if (!exists) { //C1
+    if (!exists) { // C1
       for (i = 0;; i++) { // D1
         if (arr[i] == null) { // E1
           arr[i] = x;

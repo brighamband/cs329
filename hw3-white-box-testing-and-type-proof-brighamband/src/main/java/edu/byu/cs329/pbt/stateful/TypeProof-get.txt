@@ -1,0 +1,56 @@
+SOURCE CODE
+
+public Integer get(int key) {
+    HashEntry found = find(key);
+    if (found == null) {
+        return null;
+    } else {
+        return found.value;
+    }
+}
+
+-----------------------------------
+PROOF
+
+E: {  (by end)
+  get ret -> Integer,
+  get p1 -> int,
+  key -> int,
+  find ret -> HashEntry,
+  find p1 -> int,
+  HashEntry.value -> int,
+  found -> HashEntry
+}
+
+E |- Integer get(int key) {...} : void
+        E [get ret -> Integer]
+        E [get p1 -> int]
+        E [key -> int]
+
+    1.  E |- HashEntry found = find(key); : void
+            E [found -> HashEntry]
+
+    2.  E |- if (found == null) {...} else {...} : void
+
+        a.  E |- found == null : boolean
+            i.    E |- found : tau (tau -> HashEntry)
+                      E(found) = HashEntry
+            ii.   E |- null : sigma (sigma -> null)
+                      E(null) : null
+            iii.  tau :== sigma (HashEntry :== null)
+
+        b.  E |- return null : void
+            i.    E |- get return : tau (tau -> Integer)
+                      E(get ret) = Integer
+            ii.   E |- null : sigma (sigma -> null)
+                      E(null) : null
+            iii.  tau := sigma (Integer := null)
+
+        c.  E |- return found.value : void
+            i.    E |- get return : tau (tau -> Integer)
+                      E(get ret) = Integer
+            ii.   E |- found.value : sigma (sigma -> int)
+                      E(found) = HashEntry
+                      E(HashEntry.value) = int
+            iii.  tau := sigma (Integer := int)
+            

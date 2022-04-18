@@ -1,0 +1,123 @@
+SOURCE CODE
+
+public void remove(int key) {
+    int index = hashOf(key);
+    HashEntry el = this.buffer[index];
+    if (el != null && el.key == key) {
+        this.buffer[index] = el.next;
+    }
+    while (el != null) {
+        if (el.next != null && el.next.key == key) {
+            el.next = el.next.next;
+        }
+        el = el.next;
+    }
+}
+
+-----------------------------------
+PROOF
+
+E: {  (by end)
+  remove ret -> void,
+  remove p1 -> int,
+  key -> int,
+  hashOf ret -> int,
+  hashOf p1 -> int,
+  HashEntry.value -> int,
+  this.buffer -> HashEntry[],
+  index -> int,
+  el -> HashEntry
+}
+
+E |- void remove(int key) {...} : void
+        E [remove ret -> void]
+        E [remove p1 -> int]
+        E [key -> int]
+
+    1.  E |- int index = hashOf(key); : void
+            E [index -> int]
+        
+        a.  E |- index = hashOf(key); : void
+            i.    E |- index : tau (tau -> int)
+                      E(index) = int
+            ii.   E |- hashOf(key) : sigma  
+                (1)   E |- key : omega (omega -> int)
+                          E(key) = int
+                (2)   E |- hashOf param1 : phi
+                          E(hashOf p1) = int
+                (3)   phi := omega (int := int)
+                (4)   E |- hashOf return : sigma (sigma -> int)
+                          E(hashOf ret) = int
+            iii.  tau := sigma (int := int)
+    
+    2.  E |- HashEntry el = this.buffer[index]; : void
+            E [el -> HashEntry]
+
+        a.  E |- el = this.buffer[index]; : void
+            i.   E |- el : tau (tau -> HashEntry)
+                      E(el) = HashEntry
+            ii.   E |- this.buffer[index] : sigma (sigma -> HashEntry)
+                      E(this.buffer) = HashEntry[]
+                      E(HashEntry[index]) = HashEntry
+            iii.  tau := sigma (HashEntry := HashEntry)
+
+
+    3.  E |- if (el != null && el.key == key) {...} : void
+
+        a.  E |- el != null && el.key == key : boolean
+            i.  E |- el != null : boolean
+                (1)   E |- el : tau (tau -> HashEntry)
+                          E(el) = HashEntry
+                (2)   E |- null : sigma (sigma -> null)
+                          E(null) = null
+                (3)   tau :!= sigma (HashEntry :!= null)
+            ii. E |- el.key == key : boolean
+                (1)   E |- el.key : tau (tau -> int)
+                          E(el.key) = int
+                (2)   E |- key : sigma (sigma -> int)
+                          E(key) = int
+                (3)   tau :== sigma (int :== int)
+
+        b.  E |- this.buffer[index] = el.next; : void
+            i.    E |- this.buffer[index] : tau (tau -> HashEntry)
+                      E(this.buffer) = HashEntry()
+                      E(HashEntry[index]) = HashEntry
+            ii.   E |- el.next : sigma (sigma -> HashEntry)
+                      E(el.next) = HashEntry
+            iii.  tau := sigma (HashEntry := HashEntry)
+
+    4.  E |- while(el != null) {...} : void
+
+        a.    E |- el != null : boolean
+            i.    E |- el : tau (tau -> HashEntry)
+                      E(el) = HashEntry
+            ii.   E |- null : sigma (sigma -> null)
+                      E(null) = null
+            iii.  tau :!= sigma (HashEntry :!= null)
+
+        b.    E |- if (el.next != null && el.next.key == key) {...} : void
+            i.    E |- el.next != null : boolean
+                (1)   E |- el.next : tau (tau -> HashEntry)
+                          E(el.next) = HashEntry
+                (2)   E |- null : sigma (sigma -> null)
+                          E(null) = null
+                (3)   tau :!= sigma (HashEntry :!= HashEntry)
+            ii.   E |- el.next.key == key : boolean
+                (1)   E |- el.next.key : tau (tau -> int)
+                          E(el.next.key) = int
+                (2)   E |- key : sigma (sigma -> int)
+                          E(key) = int
+                (3)   tau :== sigma (int :== int)
+            iii.   E |- el.next = el.next.next; : void
+                (1)   E |- el.next : tau (tau -> HashEntry)
+                          E(el.next) = HashEntry
+                (2)   E |- el.next.next : sigma (sigma -> HashEntry)
+                          E(el.next.next) = HashEntry
+                (3)   tau := sigma (HashEntry := HashEntry)
+
+        c.    E |- el = el.next; : void
+            i.    E |- el : tau (tau -> HashEntry)
+                      E(el) = HashEntry
+            ii.   E |- el.next : sigma (sigma -> HashEntry)
+                      E(el.next) = HashEntry
+            iii.  tau := sigma (HashEntry := HashEntry)

@@ -1,0 +1,3 @@
+[submodule "project-utils"]
+	path = project-utils
+	url = git@github.com:byu-cs329-winter2022/project-utils-329ers.git

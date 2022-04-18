@@ -1,105 +1,79 @@
 package misc;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Testing ff method using JUnit 5")
 public class FTests {
 
-  private Queue queue;
-  private final int MAX_SIZE = 2;
-  private final int X_VAL = 10;
-
-  @BeforeEach
-  public void setup() {
-    queue = new Queue(MAX_SIZE);
+  @Test
+  @DisplayName("Should throw exception when x is null (1st @requires)")
+  void should_ThrowException_when_XIsNull() {
+    Object[] arr = { 1, 2, 3 };
+    Object x = null;  // Null x (will cause the exception)
+    assertThrows(NullPointerException.class, () -> Misc.ff(x, arr));
   }
 
   @Test
-  @DisplayName("Tests Queue constructor based on specifications")
-  void testConstructor() {
-    // Test edge case of a negative input
-    int INVALID_INPUT = -10;
-    assertThrows(NegativeArraySizeException.class, () -> new Queue(INVALID_INPUT));
-
-    assertTrue(queue.arr.length > 0);
-    // Ensure queue is empty
-    for (Object item : queue.arr) {
-      assertNull(item);
-    }
-    // Make sure that the queue gets initialized
-    assertNotNull(queue.arr);
-    assertEquals(0, queue.size);
-    assertEquals(0, queue.first);
-    assertEquals(0, queue.last);
-    assertEquals(MAX_SIZE, queue.arr.length);
+  @DisplayName("Should throw exception when array is null (2nd @requires)")
+  void should_ThrowException_when_ArrIsNull() {
+    Object[] arr = null;  // Null array (will cause the exception)
+    Object x = 3;
+    assertThrows(NullPointerException.class, () -> Misc.ff(x, arr));
   }
 
   @Test
-  @DisplayName("Tests Queue size() method based on specifications") 
-  void testSizeMethod() {
-    assertEquals(queue.size, queue.size());
-    assertTrue(queue.size() >= 0);
+  @DisplayName("Should throw exception when there's no null or x element in the array (3rd @requires)")
+  void should_ThrowException_when_NoNullOrXInArr() {
+    Object[] arr = {1, 2,  3};  // Array has no null elements
+    Object x = 7; // X does not match any elements in array
+    assertThrows(ArrayIndexOutOfBoundsException.class, () -> Misc.ff(x, arr));
   }
 
   @Test
-  @DisplayName("Tests Queue max() method based on specifications") 
-  void testMaxMethod() {
-    assertEquals(queue.arr.length, queue.max());
-    assertTrue(queue.max() >= 0);
+  @DisplayName("Should have x in array when passed in (1st @ensures)")
+  void should_HaveXInArr_when_PassedIn() {
+    Object[] arr = {1, null,  null};  // Array has room for x
+    Object x = 7;
+    Misc.ff(x, arr);
+    assertTrue(Arrays.asList(arr).contains(x)); // X can be find in array
   }
 
   @Test
-  @DisplayName("Tests Queue enqueue() method based on specifications") 
-  void testEnqueueMethod() {
-    Integer x = X_VAL;
-    int origSize = queue.size;
-    int origLast = queue.last;
-    queue.enqueue(x);
-    
-    assertEquals(x, queue.arr[queue.last - 1]);
-    assertEquals(origSize + 1, queue.size);
-
-    // Test last when there's space in queue
-    assertEquals(origLast + 1, queue.last);
-
-    // Test last when there isn't space in queue
-    queue.enqueue(x);
-    assertEquals(0, queue.last);
+  @DisplayName("Should be the same exact array when x already exists in the array (2nd @ensures)")
+  void should_BeSameArr_when_XAlreadyExistsInArr() {
+    Object[] arr = { 1, 2, 3 };
+    Object x = 2; // This x already exists in the array
+    Misc.ff(x, arr);
+    assertEquals(1, arr[0]);
+    assertEquals(2, arr[1]);
+    assertEquals(3, arr[2]);
   }
 
   @Test
-  @DisplayName("Tests Queue dequeue() method based on specifications") 
-  void testDequeueMethod() {
-    // Test returns null when empty
-    assertEquals(null, queue.dequeue());
-
-    Integer x = X_VAL;
-    queue.enqueue(x);
-
-    // Test returns x when queue has one or more items
-    assertEquals(x, queue.dequeue());
-
-    assertEquals(x, queue.arr[queue.first - 1]);
+  @DisplayName("Should be the same size as before when ff gets ran (3rd @ensures)")
+  void should_BeSameSizeAsBefore_when_Ran() {
+    Object[] arr = { 1, 2, 3 };
+    int oldSize = arr.length;
+    Object x = 2;
+    Misc.ff(x, arr);  // Running this shouldn't change the size of the array
+    int newSize = arr.length;
+    assertEquals(oldSize, newSize);
   }
 
   @Test
-  @DisplayName("Tests that array has null element")
-  void testArrayHasNullElement() {
-    boolean hasNullElement = false;
-    for (Object item : queue.arr) {
-      if (item == null) {
-        hasNullElement = true;
-      }
-    }
-    assertTrue(hasNullElement);
+  @DisplayName("Should work the same when non int type (String) is used for array and x")
+  void should_WorkSame_when_NonIntTypeForArrAndX() {
+    Object[] arr = { "a", "b",  "c"}; // Array of strings instead of ints this time
+    Object x = "a"; // X exists in the array
+    Misc.ff(x, arr);
+    assertDoesNotThrow(() -> Misc.ff(x, arr));
+    assertEquals("a", arr[0]);
+    assertEquals("b", arr[1]);
+    assertEquals("c", arr[2]);
   }
-
 }

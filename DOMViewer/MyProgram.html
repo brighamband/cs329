@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ul, #myUL {
+  list-style-type: none;
+  font-family: 'DejaVu Sans Mono', monospace;
+}
+
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+.caret {
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.caret-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */'
+  transform: rotate(90deg);  
+}
+
+.nested {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+<body>
+
+<h2>Tree View</h2>
+<p>Click on the arrow(s) to open or close the tree branches.</p>
+
+<ul id="myUL">
+<li><span class="caret">CompilationUnit</span>
+<ul class="nested">
+<li><span class="caret">PackageDeclaration getPackage()</span>
+<ul class="nested">
+</ul>
+</li>
+<li><span class="caret">List&lt;ImportDeclaration&gt; imports()</span>
+<ul class="nested">
+</ul>
+</li>
+<li><span class="caret">List&lt;AbstractTypeDeclaration&gt; types()</span>
+<ul class="nested">
+<li><span class="caret">TypeDeclaration</span>
+<ul class="nested">
+<li><span class="caret">List&lt;IExtendedModifier&gt; modifiers()</span>
+<ul class="nested">
+<li><span class="caret">Modifier</span>
+<ul class="nested">
+<li>ModifierKeyword getKeyword() =&gt; 'public'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Boolean isInterface() =&gt; 'false'</li>
+<li><span class="caret">SimpleName getName()</span>
+<ul class="nested">
+<li><span class="caret">SimpleName</span>
+<ul class="nested">
+<li>String getIdentifier() =&gt; 'MyProgram'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="caret">List&lt;TypeParameter&gt; typeParameters()</span>
+<ul class="nested">
+</ul>
+</li>
+<li><span class="caret">Type getSuperclassType()</span>
+<ul class="nested">
+</ul>
+</li>
+<li><span class="caret">List&lt;Type&gt; superInterfaceTypes()</span>
+<ul class="nested">
+</ul>
+</li>
+<li><span class="caret">List&lt;BodyDeclaration&gt; bodyDeclarations()</span>
+<ul class="nested">
+<li><span class="caret">MethodDeclaration</span>
+<ul class="nested">
+<li><span class="caret">List&lt;IExtendedModifier&gt; modifiers()</span>
+<ul class="nested">
+<li><span class="caret">Modifier</span>
+<ul class="nested">
+<li>ModifierKeyword getKeyword() =&gt; 'public'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Boolean isConstructor() =&gt; 'false'</li>
+<li><span class="caret">List&lt;TypeParameter&gt; typeParameters()</span>
+<ul class="nested">
+</ul>
+</li>
+<li><span class="caret">Type getReturnType2()</span>
+<ul class="nested">
+<li><span class="caret">PrimitiveType</span>
+<ul class="nested">
+<li>Code getPrimitiveTypeCode() =&gt; 'void'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="caret">SimpleName getName()</span>
+<ul class="nested">
+<li><span class="caret">SimpleName</span>
+<ul class="nested">
+<li>String getIdentifier() =&gt; 'name'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="caret">List&lt;SingleVariableDeclaration&gt; parameters()</span>
+<ul class="nested">
+</ul>
+</li>
+<li>Integer getExtraDimensions() =&gt; '0'</li>
+<li><span class="caret">List&lt;Name&gt; thrownExceptions()</span>
+<ul class="nested">
+</ul>
+</li>
+<li><span class="caret">Block getBody()</span>
+<ul class="nested">
+<li><span class="caret">Block</span>
+<ul class="nested">
+<li><span class="caret">List&lt;Statement&gt; statements()</span>
+<ul class="nested">
+<li><span class="caret">VariableDeclarationStatement</span>
+<ul class="nested">
+<li><span class="caret">List&lt;IExtendedModifier&gt; modifiers()</span>
+<ul class="nested">
+</ul>
+</li>
+<li><span class="caret">Type getType()</span>
+<ul class="nested">
+<li><span class="caret">PrimitiveType</span>
+<ul class="nested">
+<li>Code getPrimitiveTypeCode() =&gt; 'int'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="caret">List&lt;VariableDeclarationFragment&gt; fragments()</span>
+<ul class="nested">
+<li><span class="caret">VariableDeclarationFragment</span>
+<ul class="nested">
+<li><span class="caret">SimpleName getName()</span>
+<ul class="nested">
+<li><span class="caret">SimpleName</span>
+<ul class="nested">
+<li>String getIdentifier() =&gt; 'a'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Integer getExtraDimensions() =&gt; '0'</li>
+<li><span class="caret">Expression getInitializer()</span>
+<ul class="nested">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="caret">ExpressionStatement</span>
+<ul class="nested">
+<li><span class="caret">Expression getExpression()</span>
+<ul class="nested">
+<li><span class="caret">Assignment</span>
+<ul class="nested">
+<li><span class="caret">Expression getLeftHandSide()</span>
+<ul class="nested">
+<li><span class="caret">SimpleName</span>
+<ul class="nested">
+<li>String getIdentifier() =&gt; 'a'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Operator getOperator() =&gt; '='</li>
+<li><span class="caret">Expression getRightHandSide()</span>
+<ul class="nested">
+<li><span class="caret">InfixExpression</span>
+<ul class="nested">
+<li><span class="caret">Expression getLeftOperand()</span>
+<ul class="nested">
+<li><span class="caret">NumberLiteral</span>
+<ul class="nested">
+<li>String getToken() =&gt; '1'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Operator getOperator() =&gt; '+'</li>
+<li><span class="caret">Expression getRightOperand()</span>
+<ul class="nested">
+<li><span class="caret">NumberLiteral</span>
+<ul class="nested">
+<li>String getToken() =&gt; '2'</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="caret">List&lt;Expression&gt; extendedOperands()</span>
+<ul class="nested">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+</script>
+
+</body>
+</html>
